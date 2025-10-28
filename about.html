@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Kabo's Flour Creation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="icon" href="assets/Kabo FlourLogo.png" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #8b5a3c;
+            --secondary: #d4a574;
+            --dark: #2c2416;
+            --light: #f8f5f0;
+            --accent: #ff6b6b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Grain Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 1.2rem 4rem;
+            background: rgba(10, 10, 10, 0.9);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary) 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #ffffff;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 90, 60, 0.2) 0%, rgba(10, 10, 10, 1) 100%);
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 165, 116, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 165, 116, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        
+        .section-label {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Story Section */
+        .story {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1410 100%);
+            position: relative;
+        }
+
+        .story::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .story-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .story-image {
+            position: relative;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .story-image-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            opacity: 0.3;
+        }
+        
+        .story-content {
+            padding: 2rem 0;
+        }
+
+        .story-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary);
+        }
+
+        .highlight-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+        
+        /* Mission & Vision */
+        .mission-vision {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .mv-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .mv-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mv-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 165, 116, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .mv-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .mv-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mv-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .mv-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .mv-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        /* Values Section */
+        .values {
+            background: linear-gradient(180deg, #1a1410 0%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .values::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 165, 116, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .value-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.5s;
+        }
+
+        .value-card:hover::after {
+            width: 100%;
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .value-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .value-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+        
+        /* Team Section */
+        .team {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .team-image {
+            position: relative;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .team-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .team-image-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            opacity: 0.3;
+        }
+        
+        .team-content {
+            padding: 2rem 0;
+        }
+
+        .team-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .owner-signature {
+            margin-top: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #6d4830 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: #0a0a0a;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.4);
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .footer-slogan {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: rgba(212, 165, 116, 0.6);
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-menu {
+                gap: 2rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .story-container, .team-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .mv-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .story-image, .team-image {
+                height: 350px;
+            }
+
+            .cta-section {
+                padding: 6rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="logo"><a><img src="assets/Kabo FlourLogo.png" height="80" width="80"></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-subtitle">Our Story</div>
+            <h1 class="page-title">About Kabo's Flour Creation</h1>
+            <p class="section-description">Discover the passion, dedication, and craftsmanship behind every creation</p>
+        </div>
+    </section>
+    
+    <!-- Story Section -->
+    <section class="story">
+        <div class="section-header">
+            <div class="section-label">Our Journey</div>
+            <h2 class="section-title">How It All Began</h2>
+        </div>
+        <div class="story-container">
+            <div class="story-image">
+                <div class="story-image-inner">🌾</div>
+            </div>
+            <div class="story-content">
+                <p class="story-text">
+                    Kabo's Flour Creation was born from a simple yet powerful passion for baking and bringing joy to people through delicious, carefully crafted treats. What started as a home-based passion project has blossomed into a beloved local bakery known for its quality and creativity.
+                </p>
+                <p class="story-text">
+                    Our founder, Kekeletso Portia Vogies, discovered her love for baking at a young age, experimenting with family recipes and developing her unique approach to creating memorable baked goods. This personal journey evolved into a professional endeavor with the establishment of Kabo's Flour Creation.
+                </p>
+                <div class="highlight-box">
+                    <p class="highlight-text">"Anything Flour, We Create" - this isn't just our slogan, it's our promise to you. We believe that with passion and creativity, we can transform simple ingredients into extraordinary experiences.</p>
+                </div>
+                <p class="story-text">
+                    Located in Postmasburg, we've become a cherished part of our community, providing freshly baked goods for daily enjoyment and special celebrations alike. Our commitment to quality ingredients, attention to detail, and personalized service has earned us the trust and loyalty of our customers.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision">
+        <div class="section-header">
+            <div class="section-label">Our Purpose</div>
+            <h2 class="section-title">Mission & Vision</h2>
+        </div>
+        <div class="mv-container">
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>Our mission is to spread joy through every bite by delivering high-quality, freshly baked goods made with passion, creativity, and care. We are committed to using the finest ingredients and providing excellent customer service that makes every occasion special.</p>
+            </div>
+            
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>Our vision is to become a household name in baking, known for innovation, quality, and unforgettable flavors. We aspire to grow into a trusted bakery brand that connects people, celebrates life's sweetest moments, and supports our community with warmth and excellence.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Values Section -->
+    <section class="values">
+        <div class="section-header">
+            <div class="section-label">What Drives Us</div>
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-description">These core principles guide everything we do at Kabo's Flour Creation</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-star"></i></div>
+                <h3>Quality</h3>
+                <p>We never compromise on the quality of our ingredients or the craftsmanship of our products. Every item is made with care and attention to detail.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-heart"></i></div>
+                <h3>Passion</h3>
+                <p>Baking is our passion, not just our business. This love for what we do shines through in every creation that leaves our kitchen.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Creativity</h3>
+                <p>We embrace innovation and creativity, constantly developing new flavors and designs to delight our customers and exceed their expectations.</p>
+            </div>
+            
+            <div class="value-card">
+                <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Community</h3>
+                <p>We believe in building strong relationships with our customers and supporting our local community through our products and service.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Section -->
+    <section class="team">
+        <div class="section-header">
+            <div class="section-label">Behind the Oven</div>
+            <h2 class="section-title">Meet Our Founder</h2>
+        </div>
+        <div class="team-container">
+            <div class="team-content">
+                <p class="team-text">
+                    Kekeletso Portia Vogies is the heart and soul behind Kabo's Flour Creation. With a natural talent for baking and an unwavering commitment to quality, she has built this business from the ground up.
+                </p>
+                <p class="team-text">
+                    Her journey began with experimenting in her home kitchen, perfecting family recipes and developing new creations that would eventually become customer favorites. What started as a personal passion quickly grew as friends, family, and neighbors began requesting her baked goods for their special occasions.
+                </p>
+                <p class="team-text">
+                    Kekeletso's hands-on approach ensures that every product meets her exacting standards. She personally oversees all aspects of the business, from recipe development to customer service, ensuring that the personal touch that started it all remains at the core of Kabo's Flour Creation.
+                </p>
+                <p class="owner-signature">- Kekeletso Portia Vogies</p>
+            </div>
+            <div class="team-image">
+                <div class="team-image-inner">👩‍🍳</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Taste the Difference?</h2>
+            <p class="cta-description">Experience the quality and passion of Kabo's Flour Creation for yourself. Place an order today and discover why our customers keep coming back for more.</p>
+            <a href="contact.html" class="btn btn-primary">Order Now</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <span class="footer-highlight">Kabo's Flour Creation</span></p>
+        <p>Owned by Kekeletso Portia Vogies</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p class="footer-slogan">"Anything Flour, We Create"</p>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.mv-card, .value-card, .story-text, .team-text').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

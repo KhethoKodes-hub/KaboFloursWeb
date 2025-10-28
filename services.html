@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Kabo's Flour Creation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/Kabo FlourLogo.png" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #8b5a3c;
+            --secondary: #d4a574;
+            --dark: #2c2416;
+            --light: #f8f5f0;
+            --accent: #ff6b6b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Grain Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: overlay;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 1.2rem 4rem;
+            background: rgba(10, 10, 10, 0.9);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary) 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: #ffffff;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 90, 60, 0.2) 0%, rgba(10, 10, 10, 1) 100%);
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(212, 165, 116, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 165, 116, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+        
+        .section-label {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Services Grid */
+        .services {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1410 100%);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.5s;
+        }
+
+        .service-card:hover::after {
+            width: 100%;
+        }
+        
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-10px);
+            border-color: rgba(212, 165, 116, 0.3);
+        }
+        
+        .service-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(212, 165, 116, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .service-card p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .service-features li {
+            margin-bottom: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+        }
+
+        .service-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .service-price {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+        }
+
+        .price-tag {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 0.5rem;
+        }
+        
+        /* Service Details Section */
+        .service-details {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .details-image {
+            position: relative;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .details-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .details-image-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            opacity: 0.3;
+        }
+        
+        .details-content {
+            padding: 2rem 0;
+        }
+
+        .details-text {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .process-steps {
+            margin: 2.5rem 0;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            background: var(--secondary);
+            color: #0a0a0a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .step-content p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+        }
+        
+        /* Special Offers */
+        .special-offers {
+            background: linear-gradient(180deg, #1a1410 0%, #0a0a0a 100%);
+            position: relative;
+        }
+
+        .special-offers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .offer-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .offer-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 165, 116, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .offer-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.5s;
+        }
+
+        .offer-card:hover::after {
+            width: 100%;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
+            color: #0a0a0a;
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-weight: 700;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .offer-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .offer-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .offer-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .offer-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(212, 165, 116, 0.1);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 165, 116, 0.3);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .faq-icon {
+            color: var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 2rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 4rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #6d4830 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border-radius: 0;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: #0a0a0a;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(212, 165, 116, 0.1);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.4);
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .footer-slogan {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: rgba(212, 165, 116, 0.6);
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .social-links a {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-menu {
+                gap: 2rem;
+            }
+
+            section {
+                padding: 5rem 2rem;
+            }
+
+            .details-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .services-grid, .offers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .details-image, .service-card {
+                height: auto;
+            }
+
+            .cta-section {
+                padding: 6rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="logo"><a><img src="assets/Kabo FlourLogo.png" height="80" width="80"></a>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <div class="page-subtitle">What We Offer</div>
+            <h1 class="page-title">Our Services</h1>
+            <p class="section-description">From custom celebrations to everyday indulgences, we craft each creation with passion and the finest ingredients.</p>
+        </div>
+    </section>
+    
+    <!-- Services Grid -->
+    <section class="services">
+        <div class="section-header">
+            <div class="section-label">Our Creations</div>
+            <h2 class="section-title">What We Bake</h2>
+            <p class="section-description">Discover our range of freshly baked goods and specialty services designed to make every occasion special.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <div class="service-icon"><i class="fas fa-birthday-cake"></i></div>
+                <h3>Custom Cakes & Cupcakes</h3>
+                <p>Beautiful custom creations for birthdays, weddings, and special occasions that make your celebration unforgettable.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Custom designs and flavors</li>
+                    <li><i class="fas fa-check"></i> Wedding and celebration cakes</li>
+                    <li><i class="fas fa-check"></i> Themed cupcakes and cake pops</li>
+                    <li><i class="fas fa-check"></i> Personalized decorations</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-tag">Starting from R250</div>
+                    <div class="price-note">Price varies based on size and complexity</div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <div class="service-icon"><i class="fas fa-cookie-bite"></i></div>
+                <h3>Everyday Bakes</h3>
+                <p>Freshly baked biscuits, muffins, and scones made daily with the finest ingredients for your everyday enjoyment.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Freshly baked daily</li>
+                    <li><i class="fas fa-check"></i> Variety of flavors</li>
+                    <li><i class="fas fa-check"></i> Perfect for breakfast or snacks</li>
+                    <li><i class="fas fa-check"></i> Family-sized portions available</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-tag">From R35 per item</div>
+                    <div class="price-note">Bulk discounts available</div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <div class="service-icon"><i class="fas fa-gift"></i></div>
+                <h3>Specialty Orders</h3>
+                <p>Trio boxes and happy boxes, with sugar-free and gluten-free options available upon request for special dietary needs.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Trio boxes and happy boxes</li>
+                    <li><i class="fas fa-check"></i> Sugar-free options</li>
+                    <li><i class="fas fa-check"></i> Gluten-free options</li>
+                    <li><i class="fas fa-check"></i> Custom assortment boxes</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-tag">From R120 per box</div>
+                    <div class="price-note">Custom pricing for special requests</div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">04</div>
+                <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Catering & Events</h3>
+                <p>Desserts, sweet platters, cake cups and bulk orders for celebrations, corporate functions, and community gatherings.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Dessert platters</li>
+                    <li><i class="fas fa-check"></i> Corporate events</li>
+                    <li><i class="fas fa-check"></i> Community gatherings</li>
+                    <li><i class="fas fa-check"></i> Wedding dessert tables</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-tag">Custom quotes</div>
+                    <div class="price-note">Based on event size and requirements</div>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-number">05</div>
+                <div class="service-icon"><i class="fas fa-truck"></i></div>
+                <h3>Delivery & Takeaway</h3>
+                <p>Convenient options to enjoy our freshly baked products at home or on the go with our reliable delivery service.</p>
+                <ul class="service-features">
+                    <li><i class="fas fa-check"></i> Local delivery</li>
+                    <li><i class="fas fa-check"></i> Takeaway options</li>
+                    <li><i class="fas fa-check"></i> Contactless pickup</li>
+                    <li><i class="fas fa-check"></i> Same-day orders available</li>
+                </ul>
+                <div class="service-price">
+                    <div class="price-tag">Delivery from R30</div>
+                    <div class="price-note">Free delivery for orders over R300</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Service Details Section -->
+    <section class="service-details">
+        <div class="section-header">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Our Process</h2>
+            <p class="section-description">From consultation to creation, we ensure every detail is perfect for your special occasion.</p>
+        </div>
+        <div class="details-container">
+            <div class="details-image">
+                <div class="details-image-inner">👨‍🍳</div>
+            </div>
+            <div class="details-content">
+                <p class="details-text">
+                    At Kabo's Flour Creation, we believe that the process of creating your perfect baked goods should be as delightful as the final product. Our approach ensures that every detail is carefully considered and executed with precision.
+                </p>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Consultation</h4>
+                            <p>We begin with a detailed consultation to understand your vision, preferences, and requirements for your special occasion.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Design & Planning</h4>
+                            <p>Our creative team develops a custom design and flavor profile tailored specifically to your event and preferences.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Creation</h4>
+                            <p>Using the finest ingredients, we carefully craft your order with attention to every detail and artistic element.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Delivery & Setup</h4>
+                            <p>We ensure safe delivery and professional setup of your order, making sure everything is perfect for your celebration.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="details-text">
+                    We recommend placing custom orders at least 7 days in advance to ensure availability and proper planning. For larger events, 2-3 weeks' notice is ideal.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Special Offers -->
+    <section class="special-offers">
+        <div class="section-header">
+            <div class="section-label">Limited Time</div>
+            <h2 class="section-title">Special Offers</h2>
+            <p class="section-description">Take advantage of our current promotions and seasonal specials</p>
+        </div>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <div class="offer-badge">Popular</div>
+                <div class="offer-icon"><i class="fas fa-box"></i></div>
+                <h3>Trio Box Special</h3>
+                <p>Our signature trio box featuring three of our most popular baked goods. Perfect for sharing or treating yourself.</p>
+                <div class="offer-price">
+                    <span class="original-price">R150</span>
+                    <span>R120</span>
+                </div>
+                <p class="price-note">Save R30 - Limited time offer</p>
+            </div>
+            
+            <div class="offer-card">
+                <div class="offer-badge">New</div>
+                <div class="offer-icon"><i class="fas fa-birthday-cake"></i></div>
+                <h3>Birthday Bundle</h3>
+                <p>Celebrate in style with a custom birthday cake and matching cupcakes. Perfect for parties and gatherings.</p>
+                <div class="offer-price">
+                    <span class="original-price">R450</span>
+                    <span>R380</span>
+                </div>
+                <p class="price-note">Save R70 - Book 2 weeks in advance</p>
+            </div>
+            
+            <div class="offer-card">
+                <div class="offer-badge">Seasonal</div>
+                <div class="offer-icon"><i class="fas fa-mug-hot"></i></div>
+                <h3>Weekly Muffin Club</h3>
+                <p>Join our muffin club and receive a fresh batch of assorted muffins every week. Perfect for offices or families.</p>
+                <div class="offer-price">
+                    <span>R280/month</span>
+                </div>
+                <p class="price-note">4 deliveries - Cancel anytime</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="section-header">
+            <div class="section-label">Need Help?</div>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-description">Find answers to common questions about our services and ordering process</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How far in advance should I place my order?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We recommend placing custom orders at least 7 days in advance. For wedding cakes or large events, 2-3 weeks' notice is ideal to ensure we can accommodate your request. For everyday bakes, same-day orders are often possible if placed before 10 AM.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer gluten-free or sugar-free options?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We offer both gluten-free and sugar-free options for most of our products. Please mention your dietary requirements when placing your order, and we'll be happy to accommodate your needs. Please note that while we take precautions, our kitchen is not entirely gluten-free.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What is your delivery area and cost?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We deliver throughout Postmasburg and surrounding areas. Delivery starts at R30, with free delivery for orders over R300. For locations outside our standard delivery zone, additional charges may apply. Contact us for specific delivery quotes to your area.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Can I customize the flavors in my order?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! We love creating custom flavor combinations. During your consultation, we'll discuss your preferences and suggest flavors that work well together. We have a wide range of options from classic vanilla and chocolate to more unique flavors like red velvet, lemon lavender, and caramel crunch.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What payment methods do you accept?</h3>
+                    <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div class="faq-answer">
+                    <p>We accept cash, EFT payments, and mobile payments. For custom orders, we require a 50% deposit to secure your booking, with the balance due upon delivery or pickup. For everyday bakes, payment is due at the time of order or pickup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Place Your Order?</h2>
+            <p class="cta-description">Contact us today to discuss your needs and let us create something wonderful for your next celebration or everyday indulgence.</p>
+            <a href="contact.html" class="btn btn-primary">Get In Touch</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <span class="footer-highlight">Kabo's Flour Creation</span></p>
+        <p>Owned by Kekeletso Portia Vogies</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p class="footer-slogan">"Anything Flour, We Create"</p>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.service-card, .offer-card, .process-step, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
